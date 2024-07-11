@@ -10,7 +10,17 @@
     "puppeteer": "^22.12.1",
     "readline": "^1.3.0"
   },
-  "devDependencies": {},
   "author": "sekito1107",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "fix": "prettier --write . && eslint --fix .",
+    "lint": "prettier --check . && eslint ."
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.3.0",
+    "eslint": "^9.3.0",
+    "eslint-config-prettier": "^9.1.0",
+    "globals": "^15.3.0",
+    "prettier": "^3.2.5"
+  }
 }

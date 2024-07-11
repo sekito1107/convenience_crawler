@@ -10,7 +10,7 @@ export default class App {
     });
     this.newProduct = await NewProduct.build(
       this.options,
-      await this.inputRegion()
+      await this.inputRegion(),
     );
   }
 
@@ -31,7 +31,7 @@ export default class App {
         (input) => {
           const result = this.convertRegion(input);
           resolve(result);
-        }
+        },
       );
     });
   }

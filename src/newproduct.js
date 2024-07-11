@@ -24,17 +24,17 @@ export default class NewProduct {
     newProduct.lawson = await newProduct.handleScrape(
       newProduct.needsStore("-l"),
       NewProduct.URL_MAP.lawson,
-      NewProduct.TAG_MAP.lawson
+      NewProduct.TAG_MAP.lawson,
     );
     newProduct.seven = await newProduct.handleScrape(
       newProduct.needsStore("-s"),
       NewProduct.URL_MAP.seven(region),
-      NewProduct.TAG_MAP.seven
+      NewProduct.TAG_MAP.seven,
     );
     newProduct.family = await newProduct.handleScrape(
       newProduct.needsStore("-f"),
       NewProduct.URL_MAP.family,
-      NewProduct.TAG_MAP.family
+      NewProduct.TAG_MAP.family,
     );
     return newProduct;
   }
@@ -57,7 +57,7 @@ export default class NewProduct {
       await page.goto(url);
       await page.waitForSelector(tag);
       const result = await page.$$eval(tag, (elements) =>
-        elements.map((element) => element.textContent)
+        elements.map((element) => element.textContent),
       );
       return result;
     } catch (error) {
