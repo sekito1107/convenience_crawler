@@ -1,9 +1,9 @@
 {
   "type": "module",
   "name": "convenience-crawler",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A web crawler for scraping new products from convenience stores",
-  "main": "bin/index.js",
+  "main": "index.js",
   "dependencies": {
     "chalk": "^5.3.0",
     "lodash": "^4.17.21",
@@ -22,5 +22,8 @@
     "eslint-config-prettier": "^9.1.0",
     "globals": "^15.3.0",
     "prettier": "^3.2.5"
+  },
+  "bin": {
+    "convenience-crawler": "bin/index.js"
   }
 }
