@@ -2,6 +2,20 @@ import readline from "readline";
 import NewProduct from "./newproduct.js";
 
 export default class App {
+  static REGIONS = {
+    a: "hokkaido",
+    b: "tohoku",
+    c: "kanto",
+    d: "koshinetsu",
+    e: "hokuriku",
+    f: "tokai",
+    g: "kinki",
+    h: "chugoku",
+    i: "shikoku",
+    j: "kyushu",
+    k: "okinawa",
+  };
+
   async init() {
     this.options = process.argv.slice(2);
     this.readline = readline.createInterface({
@@ -37,19 +51,6 @@ export default class App {
   }
 
   convertRegion(input) {
-    const regions = {
-      a: "hokkaido",
-      b: "tohoku",
-      c: "kanto",
-      d: "koshinetsu",
-      e: "hokuriku",
-      f: "tokai",
-      g: "kinki",
-      h: "chugoku",
-      i: "shikoku",
-      j: "kyushu",
-      k: "okinawa",
-    };
-    return regions[input] || "kanto";
+    return this.REGIONS[input] || "kanto";
   }
 }
