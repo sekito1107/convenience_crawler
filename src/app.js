@@ -35,11 +35,13 @@ export default class App {
   }
 
   #targetStores(options) {
-    if (this.options.length === 0) {
+    const selectedStores = options
+      .map(option => option.replace(/^-/, '').toLowerCase());
+    if (selectedStores.length === 0) {
       return App.TARGET_STORES;
     } else {
-      return App.TARGET_STORES.filter((store) =>
-        options.some((option) => store.toLowerCase().startsWith(option))
+      return App.TARGET_STORES.filter(store =>
+        selectedStores.some(selectedStore => store.toLowerCase().startsWith(selectedStore))
       );
     }
   }
