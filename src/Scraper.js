@@ -1,5 +1,5 @@
 import puppeteer from "puppeteer";
-import NewProduct from "./newproduct.js";
+import NewProduct from "./NewProduct.js";
 
 export default class Scraper {
   static URLS = {
@@ -57,6 +57,7 @@ export default class Scraper {
       await page.waitForSelector(tags.main);
 
       const newProducts = await page.evaluate((tags) => {
+        // eslint-disable-next-line no-undef
         const items = document.querySelectorAll(tags.main);
         return Array.from(items).map((item) => {
           const name =
@@ -73,7 +74,7 @@ export default class Scraper {
       }, tags);
 
       return newProducts.map(
-        (product) => new NewProduct(product.name, product.date, product.price)
+        (product) => new NewProduct(product.name, product.date, product.price),
       );
     } catch (error) {
       console.error(`データの取得に失敗しました ${storeName}:`, error);

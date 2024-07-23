@@ -1,6 +1,6 @@
 import readline from "readline";
-import Scraper from "./scraper.js";
-import Format from "./format.js";
+import Scraper from "./Scraper.js";
+import Format from "./Format.js";
 
 export default class App {
   static TARGET_STORES = ["Lawson", "SevenEleven", "FamilyMart"];
@@ -30,18 +30,21 @@ export default class App {
     this.targetStores = this.#targetStores(this.options);
     this.newProducts = await Scraper.stores(
       this.targetStores,
-      await this.#inputRegion()
+      await this.#inputRegion(),
     );
   }
 
   #targetStores(options) {
-    const selectedStores = options
-      .map(option => option.replace(/^-/, '').toLowerCase());
+    const selectedStores = options.map((option) =>
+      option.replace(/^-/, "").toLowerCase(),
+    );
     if (selectedStores.length === 0) {
       return App.TARGET_STORES;
     } else {
-      return App.TARGET_STORES.filter(store =>
-        selectedStores.some(selectedStore => store.toLowerCase().startsWith(selectedStore))
+      return App.TARGET_STORES.filter((store) =>
+        selectedStores.some((selectedStore) =>
+          store.toLowerCase().startsWith(selectedStore),
+        ),
       );
     }
   }
@@ -62,7 +65,7 @@ export default class App {
           rl.close();
           const result = this.#convertRegion(input);
           resolve(result);
-        }
+        },
       );
     });
   }
