@@ -65,16 +65,16 @@ export default class Scraper {
             "公式サイトを確認してください";
           const date =
             item.querySelector(tags.date)?.textContent.trim() ||
-            "公式サイトを確認してください";
+            "詳細な発売日は公式サイトを確認してください";
           const price =
             item.querySelector(tags.price)?.textContent.trim() ||
-            "公式サイトを確認してください";
+            "詳細な値段は公式サイトを確認してください";
           return { name, date, price };
         });
       }, tags);
 
       return newProducts.map(
-        (product) => new NewProduct(product.name, product.date, product.price),
+        (product) => new NewProduct(product.name, product.date, product.price)
       );
     } catch (error) {
       console.error(`データの取得に失敗しました ${storeName}:`, error);
