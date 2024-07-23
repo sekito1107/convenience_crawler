@@ -56,7 +56,7 @@ export default class Scraper {
       await page.goto(url);
       await page.waitForSelector(tags.main);
 
-      const products = await page.evaluate((tags) => {
+      const newProducts = await page.evaluate((tags) => {
         const items = document.querySelectorAll(tags.main);
         return Array.from(items).map((item) => {
           const name =
@@ -72,7 +72,7 @@ export default class Scraper {
         });
       }, tags);
 
-      return products.map(
+      return newProducts.map(
         (product) => new NewProduct(product.name, product.date, product.price)
       );
     } catch (error) {

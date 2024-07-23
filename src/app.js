@@ -19,16 +19,22 @@ export default class App {
     k: "okinawa",
   };
 
-  async init() {
+  static async run() {
+    const app = new App();
+    await app.#init();
+    console.log(Format.result(app.newProducts));
+  }
+
+  async #init() {
     this.options = process.argv.slice(2);
-    this.targetStores = this.targetStores(this.options);
+    this.targetStores = this.#targetStores(this.options);
     this.newProducts = await Scraper.stores(
       this.targetStores,
-      await this.inputRegion()
+      await this.#inputRegion()
     );
   }
 
-  targetStores(options) {
+  #targetStores(options) {
     if (this.options.length === 0) {
       return App.TARGET_STORES;
     } else {
@@ -38,13 +44,7 @@ export default class App {
     }
   }
 
-  static async run() {
-    const app = new App()
-    await app.init()
-    console.log(Format.result(app.newProducts));
-  }
-
-  async inputRegion() {
+  #inputRegion() {
     if (this.options.length !== 0 && !this.options.includes("-s")) {
       return Promise.resolve();
     }
@@ -58,14 +58,14 @@ export default class App {
         "地域を選択してください(セブンイレブンのみ適用) a:北海道 b:東北 c:関東 d:甲信越 e:北陸 f:東海 g:近畿 h:中国 i:四国 j:九州 k:沖縄\n",
         (input) => {
           rl.close();
-          const result = this.convertRegion(input);
+          const result = this.#convertRegion(input);
           resolve(result);
         }
       );
     });
   }
 
-  convertRegion(input) {
+  #convertRegion(input) {
     return App.REGIONS[input] || "kanto";
   }
 }
