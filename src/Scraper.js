@@ -29,12 +29,12 @@ export default class Scraper {
     },
   };
 
-  static async stores(stores, region) {
+  static async allStoreNewProducts(stores, region) {
     let result = {};
     const browser = await puppeteer.launch();
     try {
       for (const store of stores) {
-        result[store] = await this.#store(browser, store, region);
+        result[store] = await this.#storeNewProducts(browser, store, region);
       }
     } catch (error) {
       console.error("Error in stores method:", error);
@@ -44,7 +44,7 @@ export default class Scraper {
     return result;
   }
 
-  static async #store(browser, storeName, region = null) {
+  static async #storeNewProducts(browser, storeName, region = null) {
     const page = await browser.newPage();
     const url =
       storeName === "SevenEleven"

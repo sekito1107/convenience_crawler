@@ -28,23 +28,23 @@ export default class App {
   async #init() {
     this.options = process.argv.slice(2);
     this.targetStores = this.#targetStores(this.options);
-    this.newProducts = await Scraper.stores(
+    this.newProducts = await Scraper.allStoreNewProducts(
       this.targetStores,
-      await this.#inputRegion(),
+      await this.#inputRegion()
     );
   }
 
   #targetStores(options) {
     const selectedStores = options.map((option) =>
-      option.replace(/^-/, "").toLowerCase(),
+      option.replace(/^-/, "").toLowerCase()
     );
     if (selectedStores.length === 0) {
       return App.TARGET_STORES;
     } else {
       return App.TARGET_STORES.filter((store) =>
         selectedStores.some((selectedStore) =>
-          store.toLowerCase().startsWith(selectedStore),
-        ),
+          store.toLowerCase().startsWith(selectedStore)
+        )
       );
     }
   }
@@ -65,7 +65,7 @@ export default class App {
           rl.close();
           const result = this.#convertRegion(input);
           resolve(result);
-        },
+        }
       );
     });
   }
